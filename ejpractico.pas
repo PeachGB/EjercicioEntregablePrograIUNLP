@@ -120,7 +120,7 @@ if dimLogica < MAX_MATERIAS then
 		dimLogica:= dimLogica + 1;
 		vector[dimLogica]:= datos;
 		end
-		else 
+		else writeln('no se puede agregar al vector') 
 
 end;
 
