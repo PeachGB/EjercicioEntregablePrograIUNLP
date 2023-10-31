@@ -101,7 +101,7 @@ var ant, act, nue:listaAlumnos;
 
 begin
 new(nue);
-nue^.datos.nombre:=Datos.nombre;
+nue^.datos:=Datos;
 ant:= lista;
 act:=lista;
 while (act<>NIL) and (act^.datos.nombre < Datos.nombre) do
@@ -140,11 +140,13 @@ begin
 			promedio:= 0;
 			writeln('inserte nombre del alumno');
 			readln(Datos.nombre);
+			if datos.nombre = 'zzz' then break;
 			writeln('inserte cantidad de materias aprobadas');
 			readln(aprobadas);
-		for i:=0 to aprobadas do
+		for i:=1 to aprobadas do
 			begin
 				dimLogica:=0;
+				materia.materia.codigo:='';
 				writeln('inserte codigo de materia');
 				readln(Materia.materia.codigo);
 				while not materiaExiste(materia.materia.codigo) do
@@ -172,7 +174,8 @@ var
 i:integer;
 max:notaMateria;
 begin
-	max.nota:=0;
+	
+	max:=materias[1];
 	for i:= 1 to dimLogica do
 		begin
 			if (materias[i].nota < max.nota) then max:= materias[i];
@@ -191,14 +194,14 @@ begin
 			writeln(mMateria.materia.codigo);
 			writeln(mMateria.materia.nombre);
 			writeln(mMateria.nota);
-
+			dispose(lista);
 			lista:= lista^.sig;
+
 	end;
 end;
 
 
 var
-a,inp: String;
 listaA:listaAlumnos;
 begin
 GenerarLista(listaA);
