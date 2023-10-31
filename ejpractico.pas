@@ -18,6 +18,7 @@ type
 		alumno = record
 			Nombre:string;
 			aprobadas:Taprobadas;
+			promedio:integer;
 		end;
 		
 listaAlumnos = ^NodoAlumnos;
@@ -129,11 +130,13 @@ var
 	Datos:alumno; 
 	i,aprobadas,dimLogica,nota:integer;
 	Materia:notaMateria;
+	promedio:integer;
 	exito:boolean;
 begin
 	Datos.nombre:='';
 	while (datos.nombre <> 'zzz') do
 		begin
+			promedio:= 0;
 			writeln('inserte nombre del alumno');
 			readln(Datos.nombre);
 			writeln('inserte cantidad de materias aprobadas');
@@ -152,8 +155,11 @@ begin
 				writeln('inserte nota de la materia:',searchMateria(MATERIAS,materia.materia.codigo));
 				readln(nota);
 				materia.nota:= nota;
+				promedio:= promedio + nota;
 				agregarArray(Datos.aprobadas,dimLogica,exito,materia);
 			end;
+			promedio:=promedio div aprobadas;
+			Datos.promedio:= promedio;
 		insertarNodo(lista,Datos);
 		end;
 end;
@@ -163,6 +169,7 @@ begin
 	while (lista <> nil) do
 		begin 
 			writeln(lista^.datos.nombre);
+			writeln(lista^.datos.promedio);
 			lista:= lista^.sig;
 	end;
 end;
