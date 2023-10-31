@@ -8,10 +8,15 @@ type
 	      end;
 
    TMaterias = array[1..MAX_MATERIAS] of TMateria;
-	alumno = record
+    notaMaterias = record
+		materia:TMateria;
+		nota:integer
+	end;
+		alumno = record
 			Nombre:string;
 			aprobadas: TMaterias;
 		end;
+		
 listaAlumnos = ^NodoAlumnos;
 
 	NodoAlumnos  = record
@@ -61,6 +66,30 @@ const
 (codigo: 'S0012'; nombre: 'Seminario de Redacción de Textos Profesionales'),
 (codigo: 'U0902'; nombre: 'Química')
 );
+function searchMateria(M: Tmaterias; codigo: String):String;
+var
+	a,b,i:integer;
+begin
+	i:=0;
+	a:=0;
+
+	b:=MAX_MATERIAS;
+	repeat
+		i:=(a+b) div 2;
+		if (m[i].codigo = codigo) then begin  
+		searchMateria:= m[i].nombre; break end
+		else if (m[i].codigo < codigo) then a:= i+1
+		else if (m[i].codigo > codigo) then b:= i-1
+		else begin searchMateria:= ''; break;
+	end;
+	until(a>b);
+end;
+
+function materiaExiste(materia:string):boolean;
+begin
+	if (searchMateria(MATERIAS,materia) <> '') then materiaExiste:=TRUE else materiaExiste:= FALSE;
+end;
+
 
 procedure insertarNodo(var lista:listaAlumnos;Datos:alumno);
 var ant, act, nue:listaAlumnos;
@@ -92,30 +121,6 @@ for i:=0 to MAX_MATERIAS do
 
 	end
 
-end;
-
-function searchMateria(M: Tmaterias; codigo: String):String;
-var
-	a,b,i:integer;
-begin
-	i:=0;
-	a:=0;
-
-	b:=MAX_MATERIAS;
-	repeat
-		i:=(a+b) div 2;
-		if (m[i].codigo = codigo) then begin  
-		searchMateria:= m[i].nombre; break end
-		else if (m[i].codigo < codigo) then a:= i+1
-		else if (m[i].codigo > codigo) then b:= i-1
-		else begin searchMateria:= ''; break;
-	end;
-	until(a>b);
-end;
-
-function materiaExiste(materia:string):boolean;
-begin
-	if (searchMateria(MATERIAS,materia) <> '') then materiaExiste:=TRUE else materiaExiste:= FALSE;
 end;
 
 
