@@ -137,18 +137,19 @@ begin
 	readln(aprobadas);
 for i:=0 to aprobadas do
 	begin
-	dimLogica:=0;
-	writeln('inserte codigo de materia');
-	readln(Materia.materia.codigo);
-	if materiaExiste(Materia.materia.codigo) then
-		begin
+		dimLogica:=0;
+		writeln('inserte codigo de materia');
+		readln(Materia.materia.codigo);
+		while not materiaExiste(materia.materia.codigo) do
+			begin		
+				writeln('porfavor inserte un codigo valido');	
+				readln(materia.materia.codigo);
+			end;
 		materia.materia.nombre:= searchMateria(MATERIAS,materia.materia.codigo);
 		writeln('inserte nota de la materia:',searchMateria(MATERIAS,materia.materia.codigo));
 		readln(nota);
 		materia.nota:= nota;
 		agregarArray(Datos.aprobadas,dimLogica,exito,materia);
-		end
-	
 	end
 
 end;
