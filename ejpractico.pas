@@ -131,38 +131,40 @@ var
 	Materia:notaMateria;
 	exito:boolean;
 begin
-	writeln('inserte nombre del alumno');
-	readln(Datos.nombre);
-	writeln('inserte cantidad de materias aprobadas');
-	readln(aprobadas);
-for i:=0 to aprobadas do
-	begin
-		dimLogica:=0;
-		writeln('inserte codigo de materia');
-		readln(Materia.materia.codigo);
-		while not materiaExiste(materia.materia.codigo) do
-			begin		
-				writeln('porfavor inserte un codigo valido');	
-				readln(materia.materia.codigo);
+	Datos.nombre:='';
+	while (datos.nombre <> 'zzz') do
+		begin
+			writeln('inserte nombre del alumno');
+			readln(Datos.nombre);
+			writeln('inserte cantidad de materias aprobadas');
+			readln(aprobadas);
+		for i:=0 to aprobadas do
+			begin
+				dimLogica:=0;
+				writeln('inserte codigo de materia');
+				readln(Materia.materia.codigo);
+				while not materiaExiste(materia.materia.codigo) do
+					begin		
+						writeln('porfavor inserte un codigo valido');	
+						readln(materia.materia.codigo);
+					end;
+				materia.materia.nombre:= searchMateria(MATERIAS,materia.materia.codigo);
+				writeln('inserte nota de la materia:',searchMateria(MATERIAS,materia.materia.codigo));
+				readln(nota);
+				materia.nota:= nota;
+				agregarArray(Datos.aprobadas,dimLogica,exito,materia);
 			end;
-		materia.materia.nombre:= searchMateria(MATERIAS,materia.materia.codigo);
-		writeln('inserte nota de la materia:',searchMateria(MATERIAS,materia.materia.codigo));
-		readln(nota);
-		materia.nota:= nota;
-		agregarArray(Datos.aprobadas,dimLogica,exito,materia);
-	end
-
+		insertarNodo(lista,Datos);
+		end;
 end;
 
 
 
 var 
 a,inp: String;
+listaA:listaAlumnos;
 begin
-	writeln('codigo de materia:');
-	readln(inp);
-	writeln(materiaExiste(inp));
-a:=searchMateria(MATERIAS,inp);
-writeln(a);
+GenerarLista(listaA);
+
 
 end.
