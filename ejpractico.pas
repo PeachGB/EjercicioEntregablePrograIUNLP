@@ -120,7 +120,7 @@ if dimLogica < MAX_MATERIAS then
 		dimLogica:= dimLogica + 1;
 		vector[dimLogica]:= datos;
 		end
-		else writeln('no se puede agregar al vector') 
+		else writeln('no se puede agregar al vector')
 
 end;
 
@@ -140,9 +140,9 @@ begin
 			if datos.nombre = 'zzz' then break;
 			writeln('inserte cantidad de materias aprobadas');
 			readln(aprobadas);
+				dimLogica:=0;
 		for i:=1 to aprobadas do
 			begin
-				dimLogica:=0;
 				materia.materia.codigo:='';
 				writeln('inserte codigo de materia');
 				readln(Materia.materia.codigo);
