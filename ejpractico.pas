@@ -8,13 +8,16 @@ type
 	      end;
 
    TMaterias = array[1..MAX_MATERIAS] of TMateria;
-    notaMaterias = record
-		materias:TMaterias;
+
+    notaMateria = record
+		materia:TMateria;
 		nota:integer
 	end;
+
+   Taprobadas = array[1..MAX_MATERIAS] of notaMateria;
 		alumno = record
 			Nombre:string;
-			aprobadas: notaMaterias;
+			aprobadas:Taprobadas;
 		end;
 		
 listaAlumnos = ^NodoAlumnos;
@@ -108,7 +111,7 @@ while (act<>NIL) and (act^.datos.nombre < Datos.nombre) do
 	nue^.sig:=act;
 end;
 
-procedure agregarArray(var vector:TMaterias;var dimLogica:integer;var exito:boolean;Datos:Tmateria);
+procedure agregarArray(var vector:Taprobadas;var dimLogica:integer;var exito:boolean;Datos:notaMateria);
 begin
 if dimLogica < MAX_MATERIAS then
 	begin
@@ -124,8 +127,8 @@ end;
 procedure GenerarLista(var lista:listaAlumnos);
 var
 	Datos:alumno; 
-	i,aprobadas,dimLogica:integer;
-	Materia:Tmateria;
+	i,aprobadas,dimLogica,nota:integer;
+	Materia:notaMateria;
 	exito:boolean;
 begin
 	writeln('inserte nombre del alumno');
@@ -136,11 +139,14 @@ for i:=0 to aprobadas do
 	begin
 	dimLogica:=0;
 	writeln('inserte codigo de materia');
-	readln(Materia.codigo);
-	if materiaExiste(Materia.codigo) then
+	readln(Materia.materia.codigo);
+	if materiaExiste(Materia.materia.codigo) then
 		begin
-		materia.nombre:= searchMateria(MATERIAS,materia.codigo);
-		agregarArray(Datos.aprobadas.materias,dimLogica,exito,materia);
+		materia.materia.nombre:= searchMateria(MATERIAS,materia.materia.codigo);
+		writeln('inserte nota de la materia:',searchMateria(MATERIAS,materia.materia.codigo));
+		readln(nota);
+		materia.nota:= nota;
+		agregarArray(Datos.aprobadas,dimLogica,exito,materia);
 		end
 	
 	end
