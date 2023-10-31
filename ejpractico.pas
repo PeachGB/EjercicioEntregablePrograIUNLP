@@ -113,16 +113,14 @@ while (act<>NIL) and (act^.datos.nombre < Datos.nombre) do
 	nue^.sig:=act;
 end;
 
-procedure agregarArray(var vector:Taprobadas;var dimLogica:integer;var exito:boolean;Datos:notaMateria);
+procedure agregarArray(var vector:Taprobadas;var dimLogica:integer;Datos:notaMateria);
 begin
 if dimLogica < MAX_MATERIAS then
 	begin
 		dimLogica:= dimLogica + 1;
 		vector[dimLogica]:= datos;
-		exito:=TRUE;
 		end
 		else 
-		exito:=FALSE;
 
 end;
 
@@ -132,7 +130,6 @@ var
 	i,aprobadas,dimLogica,nota:integer;
 	Materia:notaMateria;
 	promedio:integer;
-	exito:boolean;
 begin
 	Datos.nombre:='';
 	while (datos.nombre <> 'zzz') do
@@ -159,7 +156,7 @@ begin
 				readln(nota);
 				materia.nota:= nota;
 				promedio:= promedio + nota;
-				agregarArray(Datos.aprobadas,dimLogica,exito,materia);
+				agregarArray(Datos.aprobadas,dimLogica,materia);
 			end;
 
 			datos.dimLogica:=dimLogica;
