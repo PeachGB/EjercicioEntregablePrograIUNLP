@@ -18,6 +18,7 @@ type
 		alumno = record
 			Nombre:string;
 			aprobadas:Taprobadas;
+			dimLogica:integer;
 			promedio:integer;
 		end;
 		
@@ -158,18 +159,39 @@ begin
 				promedio:= promedio + nota;
 				agregarArray(Datos.aprobadas,dimLogica,exito,materia);
 			end;
+
+			datos.dimLogica:=dimLogica;
 			promedio:=promedio div aprobadas;
 			Datos.promedio:= promedio;
 		insertarNodo(lista,Datos);
 		end;
 end;
 
+procedure mejorMateria(var mejorMateria:notaMateria;materias:Taprobadas;dimLogica:integer);
+var 
+i:integer;
+max:notaMateria;
+begin
+	max.nota:=0;
+	for i:= 1 to dimLogica do
+		begin
+			if (materias[i].nota < max.nota) then max:= materias[i];
+		end;
+		mejorMateria:=max
+	end;
+
 procedure recorrerLista(lista:listaAlumnos);
+var mMateria:notaMateria;
 begin
 	while (lista <> nil) do
 		begin 
 			writeln(lista^.datos.nombre);
 			writeln(lista^.datos.promedio);
+			mejorMateria(mMateria,lista^.datos.aprobadas,lista^.datos.dimLogica);
+			writeln(mMateria.materia.codigo);
+			writeln(mMateria.materia.nombre);
+			writeln(mMateria.nota);
+
 			lista:= lista^.sig;
 	end;
 end;
@@ -180,6 +202,6 @@ a,inp: String;
 listaA:listaAlumnos;
 begin
 GenerarLista(listaA);
-
+recorrerLista(listaA);
 
 end.
