@@ -14,7 +14,7 @@ type
 	end;
 		alumno = record
 			Nombre:string;
-			aprobadas: TMaterias;
+			aprobadas: notaMaterias;
 		end;
 		
 listaAlumnos = ^NodoAlumnos;
@@ -108,7 +108,18 @@ while (act<>NIL) and (act^.datos.nombre < Datos.nombre) do
 	nue^.sig:=act;
 end;
 
-procedure agregarArray(var vector:TMateria;var dimLogica:integer);
+procedure agregarArray(var vector:TMaterias;var dimLogica:integer;var exito:boolean;Datos:Tmateria);
+begin
+if dimLogica < MAX_MATERIAS then
+	begin
+		dimLogica:= dimLogica + 1;
+		vector[dimLogica]:= datos;
+		exito:=TRUE;
+		end
+		else 
+		exito:=FALSE;
+
+end;
 
 procedure GenerarLista(var lista:listaAlumnos);
 var
