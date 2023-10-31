@@ -9,7 +9,7 @@ type
 
    TMaterias = array[1..MAX_MATERIAS] of TMateria;
     notaMaterias = record
-		materia:TMateria;
+		materias:TMaterias;
 		nota:integer
 	end;
 		alumno = record
@@ -125,7 +125,8 @@ procedure GenerarLista(var lista:listaAlumnos);
 var
 	Datos:alumno; 
 	i,aprobadas,dimLogica:integer;
-	codigoMateria:codigo;
+	Materia:Tmateria;
+	exito:boolean;
 begin
 	writeln('inserte nombre del alumno');
 	readln(Datos.nombre);
@@ -133,9 +134,14 @@ begin
 	readln(aprobadas);
 for i:=0 to aprobadas do
 	begin
-	dimLogica:=0
+	dimLogica:=0;
 	writeln('inserte codigo de materia');
-	readln(codigoMateria);
+	readln(Materia.codigo);
+	if materiaExiste(Materia.codigo) then
+		begin
+		materia.nombre:= searchMateria(MATERIAS,materia.codigo);
+		agregarArray(Datos.aprobadas.materias,dimLogica,exito,materia);
+		end
 	
 	end
 
