@@ -124,12 +124,19 @@ end;
 procedure GenerarLista(var lista:listaAlumnos);
 var
 	Datos:alumno; 
-	i:integer;
+	i,aprobadas,dimLogica:integer;
+	codigoMateria:codigo;
 begin
-readln(Datos.nombre);
-for i:=0 to MAX_MATERIAS do
+	writeln('inserte nombre del alumno');
+	readln(Datos.nombre);
+	writeln('inserte cantidad de materias aprobadas');
+	readln(aprobadas);
+for i:=0 to aprobadas do
 	begin
-
+	dimLogica:=0
+	writeln('inserte codigo de materia');
+	readln(codigoMateria);
+	
 	end
 
 end;
