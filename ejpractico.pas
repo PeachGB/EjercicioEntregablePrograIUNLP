@@ -158,9 +158,17 @@ begin
 		end;
 end;
 
+procedure recorrerLista(lista:listaAlumnos);
+begin
+	while (lista <> nil) do
+		begin 
+			writeln(lista^.datos.nombre);
+			lista:= lista^.sig;
+	end;
+end;
 
 
-var 
+var
 a,inp: String;
 listaA:listaAlumnos;
 begin
